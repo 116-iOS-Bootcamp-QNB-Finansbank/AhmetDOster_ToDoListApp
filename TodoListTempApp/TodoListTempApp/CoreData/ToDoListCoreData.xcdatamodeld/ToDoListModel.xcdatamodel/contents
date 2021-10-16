@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19197" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class"/>
+    <entity name="Entity1" representedClassName="Entity1" syncable="YES" codeGenerationType="class"/>
+    <entity name="Entity2" representedClassName="Entity2" syncable="YES" codeGenerationType="class"/>
+    <entity name="ToDoEntity" representedClassName="ToDoEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="completionDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="detail" attributeType="String"/>
+        <attribute name="ids" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+    </entity>
+    <entity name="ToDoEntitys" representedClassName="ToDoEntitys" syncable="YES" codeGenerationType="class">
+        <attribute name="completionDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="detail" attributeType="String"/>
+        <attribute name="ids" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="ToDoEntity" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="ToDoEntitys" positionX="-54" positionY="18" width="128" height="89"/>
+        <element name="Entity" positionX="-36" positionY="45" width="128" height="29"/>
+        <element name="Entity1" positionX="-18" positionY="54" width="128" height="29"/>
+        <element name="Entity2" positionX="0" positionY="63" width="128" height="29"/>
+    </elements>
+</model>
