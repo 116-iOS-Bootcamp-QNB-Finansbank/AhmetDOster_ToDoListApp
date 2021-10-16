@@ -24,6 +24,9 @@ class ViewController: UIViewController {
         
         let addButton = UIBarButtonItem(title: "Ekle", style: .plain, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItems = [addButton]
+        
+        let sortButton = UIBarButtonItem(title: "Sırala", style: .plain, target: self, action: #selector(sortButtonTapped))
+        navigationItem.leftBarButtonItems = [sortButton]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +43,15 @@ class ViewController: UIViewController {
         
         let viewController = ToDoDetailBuilder.build(with: nil)
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc func sortButtonTapped(){
+        
+        filterToDoList = filterToDoList.sorted(by: {
+            $0.completionDate.compare($1.completionDate) == .orderedDescending
+        })
+        
+        myTableView.reloadData()
     }
 }
 
