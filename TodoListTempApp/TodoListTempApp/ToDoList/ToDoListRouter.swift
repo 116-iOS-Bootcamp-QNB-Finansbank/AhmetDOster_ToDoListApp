@@ -17,8 +17,7 @@ class ToDoListRouter: NSObject, ToDoListRouterProtocol {
     func navigate(to route: ToDoListRoute) {
         switch route {
         case .showToDoDetail(let toDo):
-            let viewController = ToDoDetailBuilder.build(with: /*toDo*/
-                                                         ToDoListPresentation(toDo: toDo))
+            let viewController = ToDoDetailBuilder.build(with: toDo)
             self.view.navigationController?.pushViewController(viewController, animated: true)
         }
     }

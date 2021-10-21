@@ -68,7 +68,7 @@
         <!--Detay-->
         <scene sceneID="480-mP-h9M">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" id="2aZ-d3-BS6" customClass="DetailViewController" customModule="TodoListTempApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ToDoDetailViewController" id="2aZ-d3-BS6" customClass="ToDoDetailViewController" customModule="TodoListTempApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cng-0C-9A8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>

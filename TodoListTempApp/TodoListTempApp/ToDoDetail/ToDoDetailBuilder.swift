@@ -10,14 +10,12 @@ import UIKit
 
 class ToDoDetailBuilder{
     
-    static func build(with toDo: ToDoListPresentation!) -> DetailViewController {
+    static func build(with toDo: ToDoObj!) -> ToDoDetailViewController {
         
         let storyboard = UIStoryboard(name: "ToDoStoryBoard", bundle: nil)
-        let viewController = storyboard.instantiateViewController(identifier: "DetailViewController") as! DetailViewController
+        let viewController = storyboard.instantiateViewController(identifier: "ToDoDetailViewController") as! ToDoDetailViewController
         
-        viewController.toDo=toDo
-        
-       // viewController.viewModel = MovieDetailViewModel(movie: movie)
+        viewController.viewModel = ToDoDetailViewModel(toDo: toDo)
         return viewController
     }
     

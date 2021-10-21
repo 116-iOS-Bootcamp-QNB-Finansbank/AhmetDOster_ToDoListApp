@@ -7,15 +7,25 @@
 
 import Foundation
 
-class ToDoDetailViewModel {
-    private let service: ToDoEntityManager
-    private var toDo: ToDoDetailPresentation
+
+class ToDoDetailViewModel: ToDoDetailViewModelProtocol {
     
-    init() {
+    weak var delegate: ToDoDetailViewModelDelegate?
+    
+    private var toDo: ToDoObj
+    private let service: ToDoEntityManager
+    
+    init(toDo: ToDoObj) {
+        self.toDo = toDo
         self.service = appContainer.service
-        self.toDo = ToDoDetailPresentation()
     }
     
+    func viewDidLoad() {
+        delegate?.showMovieDetail(ToDoDetailPresentation(toDo: toDo))
+    }
+    
+    
+    /*
     func getToDo(id: String) -> ToDoDetailPresentation
     {
         var toDoObject: ToDoObj! = service.getToDoEntity(id: id)
@@ -24,16 +34,18 @@ class ToDoDetailViewModel {
         
         return toDo
     }
+     */
     
-    func updateToDo(toDo: ToDoDetailPresentation){
+    func updateToDo(toDoDetail: ToDoDetailPresentation){
         
-        service.updateToDo(toDo: ToDoObj(id: toDo.id, title: toDo.title, detail: toDo.detail, completionDate: toDo.completionDate))
+        service.updateToDo(toDo: ToDoObj(id: toDoDetail.id, title: toDoDetail.title, detail: toDoDetail.detail, completionDate: toDoDetail.completionDate))
     }
     
-    func addToDo(toDo: ToDoDetailPresentation){
+    func addToDo(toDoDetail: ToDoDetailPresentation){
         
-        service.addToDo(toDo: ToDoObj(id: toDo.id, title: toDo.title, detail: toDo.detail, completionDate: toDo.completionDate))
+        service.addToDo(toDo: ToDoObj(id: toDoDetail.id, title: toDoDetail.title, detail: toDoDetail.detail, completionDate: toDoDetail.completionDate))
     }
+    
     
 }
 
