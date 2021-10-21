@@ -75,21 +75,22 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
 extension ToDoListViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //let detailViewController = DetailViewController()
-        //self.navigationController?.pushViewController(detailViewController, animated: true)
+        let reelIndexPath : IndexPath = getReelIndexPath(todo:filterToDoList[indexPath.row], indexPath: indexPath)
+        presenter.didSelectRow(at: reelIndexPath)
+    }
+    
+    func getReelIndexPath(todo: ToDoListPresentation, indexPath: IndexPath) -> IndexPath
+    {
+        var indexPath = indexPath
         
-        //let viewController = DetailViewController()
-        //viewController.toDo = filterToDoList[indexPath.row]
-        //self.navigationController?.pushViewController(viewController, animated: true)
+        for i in 0...toDos.count {
+            if toDos[i].id == todo.id {
+                indexPath.row = i
+                break
+            }
+        }
         
-        //DetailViewController().toDo = filterToDoList[indexPath.row]
-        
-        presenter.didSelectRow(at: indexPath)
-        
-        /*
-        let viewController = ToDoDetailBuilder.build(with: filterToDoList[indexPath.row])
-        self.navigationController?.pushViewController(viewController, animated: true)
-         */
+        return indexPath
     }
 }
 
