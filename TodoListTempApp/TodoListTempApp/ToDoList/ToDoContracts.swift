@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 //MARK: View
 protocol ToDoListViewProtocol: NSObject {
@@ -26,12 +27,14 @@ protocol ToDoListInteractorProtocol: NSObject {
     var delegate: ToDoListInteractorDelegate? { get set }
     func viewDidLoad()
     func didSelectRow(at indexPath: IndexPath)
+    func addNotification(any: UIViewController, name: Notification.Name, selector: Selector)
 }
 
 //MARK: Presenter
 protocol ToDoListPresenterProtocol: NSObject {
     func viewDidLoad()
     func didSelectRow(at indexPath: IndexPath)
+    func addNotification(any: UIViewController, name: Notification.Name, selector: Selector) 
 }
 
 enum ToDoListPresenterOutput {
@@ -46,3 +49,4 @@ enum ToDoListRoute {
 protocol ToDoListRouterProtocol: NSObject {
     func navigate(to route: ToDoListRoute)
 }
+

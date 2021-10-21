@@ -30,6 +30,8 @@
 		F05CD69E272180AC00570223 /* ToDoListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05CD69D272180AC00570223 /* ToDoListRouter.swift */; };
 		F05CD6A02721820700570223 /* ToDoObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05CD69F2721820700570223 /* ToDoObj.swift */; };
 		F05CD6A227218B7F00570223 /* ToDoDetailContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05CD6A127218B7F00570223 /* ToDoDetailContracts.swift */; };
+		F05CD6A42721E74100570223 /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05CD6A32721E74100570223 /* Notification+Extension.swift */; };
+		F05CD6A72721F48F00570223 /* NotificationCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05CD6A62721F48F00570223 /* NotificationCenterManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		F05CD69D272180AC00570223 /* ToDoListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListRouter.swift; sourceTree = "<group>"; };
 		F05CD69F2721820700570223 /* ToDoObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoObj.swift; sourceTree = "<group>"; };
 		F05CD6A127218B7F00570223 /* ToDoDetailContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailContracts.swift; sourceTree = "<group>"; };
+		F05CD6A32721E74100570223 /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
+		F05CD6A62721F48F00570223 /* NotificationCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,7 @@
 				F04973B4271B7CC800757FAB /* AppContainer.swift */,
 				F04973A2271B63CD00757FAB /* AppRouter.swift */,
 				F0497375271ABBED00757FAB /* SceneDelegate.swift */,
+				F05CD6A52721E74800570223 /* Extension */,
 				F0497398271AF79800757FAB /* Entities */,
 				F04973A4271B647500757FAB /* ToDoList */,
 				F04973A5271B648A00757FAB /* ToDoDetail */,
@@ -101,7 +106,7 @@
 				F0497381271ABBF500757FAB /* LaunchScreen.storyboard */,
 				F0497384271ABBF600757FAB /* Info.plist */,
 				F0497395271AF75B00757FAB /* CoreData */,
-				F0497394271AF71C00757FAB /* Service */,
+				F05CD6A92721F4C300570223 /* Manager */,
 			);
 			path = TodoListTempApp;
 			sourceTree = "<group>";
@@ -133,8 +138,8 @@
 		F04973A4271B647500757FAB /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
-				F049739C271B459C00757FAB /* ToDoListBuilder.swift */,
 				F0497377271ABBED00757FAB /* ToDoListViewController.swift */,
+				F049739C271B459C00757FAB /* ToDoListBuilder.swift */,
 				F0497379271ABBED00757FAB /* ToDoStoryBoard.storyboard */,
 				F04973A6271B64CB00757FAB /* ToDoListPresentation.swift */,
 				F04973AC271B6AB600757FAB /* ToDoListViewModel.swift */,
@@ -149,13 +154,38 @@
 		F04973A5271B648A00757FAB /* ToDoDetail */ = {
 			isa = PBXGroup;
 			children = (
-				F049739E271B45C400757FAB /* ToDoDetailBuilder.swift */,
 				F049738A271AE22800757FAB /* ToDoDetailViewController.swift */,
-				F04973AE271B6F4D00757FAB /* ToDoDetailPresentation.swift */,
 				F04973B0271B6F6300757FAB /* ToDoDetailModel.swift */,
+				F049739E271B45C400757FAB /* ToDoDetailBuilder.swift */,
+				F04973AE271B6F4D00757FAB /* ToDoDetailPresentation.swift */,
 				F05CD6A127218B7F00570223 /* ToDoDetailContracts.swift */,
 			);
 			path = ToDoDetail;
+			sourceTree = "<group>";
+		};
+		F05CD6A52721E74800570223 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F05CD6A32721E74100570223 /* Notification+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		F05CD6A82721F49C00570223 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				F05CD6A62721F48F00570223 /* NotificationCenterManager.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		F05CD6A92721F4C300570223 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F0497394271AF71C00757FAB /* Service */,
+				F05CD6A82721F49C00570223 /* Notification */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,12 +264,14 @@
 				F05CD6A227218B7F00570223 /* ToDoDetailContracts.swift in Sources */,
 				F0497378271ABBED00757FAB /* ToDoListViewController.swift in Sources */,
 				F04973B5271B7CC800757FAB /* AppContainer.swift in Sources */,
+				F05CD6A72721F48F00570223 /* NotificationCenterManager.swift in Sources */,
 				F049739D271B459C00757FAB /* ToDoListBuilder.swift in Sources */,
 				F05CD69C2721809A00570223 /* ToDoListPresenter.swift in Sources */,
 				F04973B1271B6F6300757FAB /* ToDoDetailModel.swift in Sources */,
 				F049739B271B3A3C00757FAB /* TodoListTempApp.xcdatamodeld in Sources */,
 				F049738B271AE22800757FAB /* ToDoDetailViewController.swift in Sources */,
 				F0497374271ABBED00757FAB /* AppDelegate.swift in Sources */,
+				F05CD6A42721E74100570223 /* Notification+Extension.swift in Sources */,
 				F04973A7271B64CB00757FAB /* ToDoListPresentation.swift in Sources */,
 				F0497393271AF70D00757FAB /* ToDoEntityManager.swift in Sources */,
 				F04973AF271B6F4D00757FAB /* ToDoDetailPresentation.swift in Sources */,

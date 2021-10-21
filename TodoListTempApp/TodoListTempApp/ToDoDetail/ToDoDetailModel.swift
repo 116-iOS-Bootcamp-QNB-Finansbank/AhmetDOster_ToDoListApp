@@ -12,29 +12,19 @@ class ToDoDetailViewModel: ToDoDetailViewModelProtocol {
     
     weak var delegate: ToDoDetailViewModelDelegate?
     
-    private var toDo: ToDoObj
+    private var toDo: ToDoObj!
     private let service: ToDoEntityManager
+    private let notificationManager: NotificationCenterManager
     
-    init(toDo: ToDoObj) {
+    init(toDo: ToDoObj!) {
         self.toDo = toDo
         self.service = appContainer.service
+        self.notificationManager = appContainer.notificationManager
     }
     
     func viewDidLoad() {
         delegate?.showMovieDetail(ToDoDetailPresentation(toDo: toDo))
     }
-    
-    
-    /*
-    func getToDo(id: String) -> ToDoDetailPresentation
-    {
-        var toDoObject: ToDoObj! = service.getToDoEntity(id: id)
-        
-        toDo=ToDoDetailPresentation(toDo: toDoObject)
-        
-        return toDo
-    }
-     */
     
     func updateToDo(toDoDetail: ToDoDetailPresentation){
         
@@ -46,7 +36,10 @@ class ToDoDetailViewModel: ToDoDetailViewModelProtocol {
         service.addToDo(toDo: ToDoObj(id: toDoDetail.id, title: toDoDetail.title, detail: toDoDetail.detail, completionDate: toDoDetail.completionDate))
     }
     
-    
+    func postNotification(name: Notification.Name)
+    {
+        notificationManager.postNotification(name: name)
+    }
 }
 
 

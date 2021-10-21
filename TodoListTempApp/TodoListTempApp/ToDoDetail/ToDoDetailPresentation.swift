@@ -22,7 +22,15 @@ struct ToDoDetailPresentation {
     }
     
     init(toDo: ToDoObj!) {
-        self.init(id: toDo.id, title: toDo.title, detail: toDo.detail, completionDate: toDo.completionDate)
+        
+        if let toDo = toDo
+        {
+            self.init(id: toDo.id, title: toDo.title, detail: toDo.detail, completionDate: toDo.completionDate)
+        }
+        else
+        {
+            self.init()
+        }
     }
     
     init() {

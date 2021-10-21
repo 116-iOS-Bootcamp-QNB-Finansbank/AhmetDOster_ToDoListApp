@@ -9,54 +9,31 @@ import UIKit
 
 class ToDoDetailViewController: UIViewController {
 
+    //MARK: - UI Control
     @IBOutlet weak var titleTextField: UITextField!
-    
     @IBOutlet weak var detailTextField: UITextField!
-    
     @IBOutlet weak var completionDatePicker: UIDatePicker!
-    
     @IBOutlet weak var infoLabel: UILabel!
     
+    //MARK: - Properties
+    var toDoDetail: ToDoDetailPresentation!
     var viewModel: ToDoDetailViewModelProtocol! {
         didSet {
             viewModel.delegate = self
         }
     }
+    var isChange: Bool!
     
+    //MARK: - Func( override)
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         viewModel.viewDidLoad()
         addNavigationBarSaveButton()
         addNavigationBarBackButton()
+        isChange = false
         
-        /*
-        model = ToDoDetailViewModel()
-        setCompletionDatePickerMinDate()
-     
-        setInfoLabelHidden(isHidden : false)
-        setDetail()
-         */
-        
-        //setDetail()
-        //self.view.backgroundColor = UIColor.white
-        // Do any additional setup after loading the view.
-        
-       // let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
-        //let play = UIBarButtonItem(title: "Play", style: .plain, target: self, action: #selector(playTapped))
-        
-        
-        //navigationItem.title = "Detay"
-       
-       }
-
-    @objc func backButtonTapped(){
-        
-        self.navigationController?.popToRootViewController(animated: true)
-        ///[self.navigationController popViewControllerAnimated:true]
     }
-    
-    //var model: ToDoDetailViewModel! = nil
     
     func setInfoLabelHidden(isHidden: Bool)
     {
@@ -70,12 +47,11 @@ class ToDoDetailViewController: UIViewController {
     }
     
     func addNavigationBarBackButton(){
-        self.navigationItem.hidesBackButton = true;
         
+        self.navigationItem.hidesBackButton = true
         
         let image = UIImage(systemName: "chevron.left")
         let back = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(backButtonTapped))
-        back.accessibilityLabel = "Geri"
         
         
         navigationItem.leftBarButtonItems = [back]
@@ -86,9 +62,6 @@ class ToDoDetailViewController: UIViewController {
         completionDatePicker.minimumDate = Date()
     }
     
-    var toDo: ToDoListPresentation!
-    var toDoDetail: ToDoDetailPresentation!
-    
     func setDetail(toDoDetail: ToDoDetailPresentation)
     {
         titleTextField?.text = toDoDetail.title
@@ -96,6 +69,14 @@ class ToDoDetailViewController: UIViewController {
         completionDatePicker.date = toDoDetail.completionDate
     }
     
+    func setInfoLabel(text: String, color: UIColor)
+    {
+        infoLabel.text = text
+        infoLabel.textColor = color
+        setInfoLabelHidden(isHidden: true)
+    }
+    
+    //MARK: - ObjC Func
     @objc func saveButtonTapped(){
         
         
@@ -104,9 +85,10 @@ class ToDoDetailViewController: UIViewController {
         {
             let completionDate = completionDatePicker.date
             
-            if toDo != nil
+            isChange = true
+            if toDoDetail != nil && toDoDetail.id != ""
             {
-                let toDoObj = ToDoDetailPresentation(id: toDo.id, title: title, detail: detail, completionDate: completionDate)
+                let toDoObj = ToDoDetailPresentation(id: toDoDetail.id, title: title, detail: detail, completionDate: completionDate)
                 viewModel.updateToDo(toDoDetail: toDoObj)
                 setInfoLabel(text: "Güncellendi.", color: UIColor.green)
             }
@@ -126,17 +108,21 @@ class ToDoDetailViewController: UIViewController {
         
     }
     
-    func setInfoLabel(text: String, color: UIColor)
-    {
-        infoLabel.text = text
-        infoLabel.textColor = color
-        setInfoLabelHidden(isHidden: true)
+    @objc func backButtonTapped(){
+        
+        if isChange
+        {
+            viewModel.postNotification(name: .refreshToDoList)
+        }
+        navigationController?.popViewController(animated: true)
     }
 }
 
+//MARK: - Extension: ToDoDetailViewModelDelegate
 extension ToDoDetailViewController: ToDoDetailViewModelDelegate {
     func showMovieDetail(_ toDo: ToDoDetailPresentation) {
         
+        toDoDetail = toDo
         setDetail(toDoDetail: toDo)
     }
 }

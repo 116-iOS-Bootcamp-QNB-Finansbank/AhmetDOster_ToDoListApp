@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 let appContainer = AppContainer()
 
 class AppContainer {
     let service = ToDoEntityManager()
     let router = AppRouter()
+    let notificationManager = NotificationCenterManager()
 }

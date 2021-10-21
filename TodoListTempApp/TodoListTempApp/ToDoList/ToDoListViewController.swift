@@ -10,7 +10,6 @@ import CoreData
 
 class ToDoListViewController: UIViewController, ToDoListViewProtocol {
     
- 
     @IBOutlet weak var toDoTableView: UITableView!
     
     override func viewDidLoad() {
@@ -18,12 +17,7 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
         
         presenter.viewDidLoad()
         
-        /*
-        model = ToDoListViewModel()
-        
-        toDoList = model.getToDos()
-        filterToDoList = toDoList
-         */
+        addNotificationRefreshToDoList()
         
         let addButton = UIBarButtonItem(title: "Ekle", style: .plain, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItems = [addButton]
@@ -35,6 +29,14 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
     
     var presenter: ToDoListPresenterProtocol!
     var toDos: [ToDoListPresentation] = []
+    
+    func addNotificationRefreshToDoList() {
+        NotificationCenterManager().addNotification(any: self, name: .refreshToDoList, selector: #selector(refreshToDoList))
+    }
+    
+    @objc func refreshToDoList() {
+        presenter.viewDidLoad()
+    }
 
     func handleOutput(_ output: ToDoListPresenterOutput) {
         switch output {
@@ -93,7 +95,7 @@ extension ToDoListViewController : UITableViewDelegate {
 
 extension ToDoListViewController : UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filterToDoList = searchText.isEmpty ? toDoList : toDoList.filter { (toDo) in
+        filterToDoList = searchText.isEmpty ? toDos : toDos.filter { (toDo) in
             return toDo.title.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         toDoTableView.reloadData()

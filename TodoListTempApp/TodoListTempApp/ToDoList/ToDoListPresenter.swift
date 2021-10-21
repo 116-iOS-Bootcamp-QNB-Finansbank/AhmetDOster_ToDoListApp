@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import UIKit
 
 class ToDoListPresenter: NSObject, ToDoListPresenterProtocol {
     private unowned let view: ToDoListViewProtocol
     private let router: ToDoListRouterProtocol
     private var interactor: ToDoListInteractorProtocol
+
     
     init(interactor: ToDoListInteractorProtocol,
          view: ToDoListViewProtocol,
@@ -26,6 +28,10 @@ class ToDoListPresenter: NSObject, ToDoListPresenterProtocol {
     
     func didSelectRow(at indexPath: IndexPath) {
         interactor.didSelectRow(at: indexPath)
+    }
+    
+    func addNotification(any: UIViewController, name: Notification.Name, selector: Selector) {
+        interactor.addNotification(any: any, name: name, selector: selector)
     }
 }
 

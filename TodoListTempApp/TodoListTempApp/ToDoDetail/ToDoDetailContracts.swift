@@ -16,4 +16,5 @@ protocol ToDoDetailViewModelProtocol {
     func viewDidLoad()
     func updateToDo(toDoDetail: ToDoDetailPresentation)
     func addToDo(toDoDetail: ToDoDetailPresentation)
+    func postNotification(name: Notification.Name)
 }
