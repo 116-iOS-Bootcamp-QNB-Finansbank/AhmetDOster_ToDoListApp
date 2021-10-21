@@ -16,7 +16,6 @@ class ToDoListViewModel {
         self.service = appContainer.service
     }
     
-    
     func getToDos() -> [ToDoListPresentation]! {
         toDos = service.getToDos()
         

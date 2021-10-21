@@ -10,34 +10,45 @@ import CoreData
 
 class ToDoListViewController: UIViewController, ToDoListViewProtocol {
     
+    //MARK: - UI View Controller
     @IBOutlet weak var toDoTableView: UITableView!
     
+    //MARK: - Properties
+    var toDoList: [ToDoListPresentation] = []
+    var filterToDoList: [ToDoListPresentation] = []
+    var model : ToDoListViewModel!
+    var presenter: ToDoListPresenterProtocol!
+    var toDos: [ToDoListPresentation] = []
+    
+    //MARK: - func (UIViewController)
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         presenter.viewDidLoad()
         
         addNotificationRefreshToDoList()
         
+        addAddUIBarButtonItem()
+        sortAddUIBarButtonItem()
+    }
+    
+    //MARK: - func (private)
+    func addAddUIBarButtonItem() {
         let addButton = UIBarButtonItem(title: "Ekle", style: .plain, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItems = [addButton]
         
+    }
+    
+    func sortAddUIBarButtonItem() {
         let sortButton = UIBarButtonItem(title: "Sırala", style: .plain, target: self, action: #selector(sortButtonTapped))
         navigationItem.leftBarButtonItems = [sortButton]
-      
     }
-    
-    var presenter: ToDoListPresenterProtocol!
-    var toDos: [ToDoListPresentation] = []
     
     func addNotificationRefreshToDoList() {
-        NotificationCenterManager().addNotification(any: self, name: .refreshToDoList, selector: #selector(refreshToDoList))
+        self.presenter.addNotification(any: self, name: .refreshToDoList, selector: #selector(refreshToDoList))
     }
     
-    @objc func refreshToDoList() {
-        presenter.viewDidLoad()
-    }
-
     func handleOutput(_ output: ToDoListPresenterOutput) {
         switch output {
         case .showToDoList(let toDos):
@@ -50,11 +61,7 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
         }
     }
     
-    
-    var toDoList: [ToDoListPresentation] = []
-    var filterToDoList: [ToDoListPresentation] = []
-    var model : ToDoListViewModel! = nil
-    
+    //MARK: - func (objC)
     @objc func addButtonTapped(){
         
         let viewController = ToDoDetailBuilder.build(with: nil)
@@ -69,9 +76,14 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
         
         toDoTableView.reloadData()
     }
+    
+    @objc func refreshToDoList() {
+        presenter.viewDidLoad()
+    }
 }
 
 
+//MARK: - UITableViewDelegate (extension)
 extension ToDoListViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -94,6 +106,7 @@ extension ToDoListViewController : UITableViewDelegate {
     }
 }
 
+//MARK: - UISearchBarDelegate (extension)
 extension ToDoListViewController : UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filterToDoList = searchText.isEmpty ? toDos : toDos.filter { (toDo) in
@@ -104,6 +117,7 @@ extension ToDoListViewController : UISearchBarDelegate{
 }
 
 
+//MARK: - UITableViewDataSource (extension)
 extension ToDoListViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filterToDoList.count
