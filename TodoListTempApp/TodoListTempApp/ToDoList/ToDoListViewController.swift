@@ -8,30 +8,44 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController {
-
-    @IBOutlet weak var mySearchBar: UISearchBar!
-    @IBOutlet weak var myTableView: UITableView!
+class ToDoListViewController: UIViewController, ToDoListViewProtocol {
     
+ 
+    @IBOutlet weak var toDoTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        presenter.viewDidLoad()
+        
+        /*
         model = ToDoListViewModel()
         
         toDoList = model.getToDos()
         filterToDoList = toDoList
+         */
         
         let addButton = UIBarButtonItem(title: "Ekle", style: .plain, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItems = [addButton]
         
         let sortButton = UIBarButtonItem(title: "Sırala", style: .plain, target: self, action: #selector(sortButtonTapped))
         navigationItem.leftBarButtonItems = [sortButton]
+      
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewDidLoad()
-        myTableView.reloadData()
+    var presenter: ToDoListPresenterProtocol!
+    var toDos: [ToDoListPresentation] = []
+
+    func handleOutput(_ output: ToDoListPresenterOutput) {
+        switch output {
+        case .showToDoList(let toDos):
+            self.toDos = toDos
+            self.filterToDoList = toDos
+            
+            DispatchQueue.main.async {
+                self.toDoTableView.reloadData()
+            }
+        }
     }
     
     
@@ -51,12 +65,12 @@ class ViewController: UIViewController {
             $0.completionDate.compare($1.completionDate) == .orderedDescending
         })
         
-        myTableView.reloadData()
+        toDoTableView.reloadData()
     }
 }
 
 
-extension ViewController : UITableViewDelegate {
+extension ToDoListViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let detailViewController = DetailViewController()
@@ -68,22 +82,26 @@ extension ViewController : UITableViewDelegate {
         
         //DetailViewController().toDo = filterToDoList[indexPath.row]
         
+        presenter.didSelectRow(at: indexPath)
+        
+        /*
         let viewController = ToDoDetailBuilder.build(with: filterToDoList[indexPath.row])
         self.navigationController?.pushViewController(viewController, animated: true)
+         */
     }
 }
 
-extension ViewController : UISearchBarDelegate{
+extension ToDoListViewController : UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filterToDoList = searchText.isEmpty ? toDoList : toDoList.filter { (toDo) in
             return toDo.title.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
-        myTableView.reloadData()
+        toDoTableView.reloadData()
     }
 }
 
 
-extension ViewController : UITableViewDataSource{
+extension ToDoListViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filterToDoList.count
     }

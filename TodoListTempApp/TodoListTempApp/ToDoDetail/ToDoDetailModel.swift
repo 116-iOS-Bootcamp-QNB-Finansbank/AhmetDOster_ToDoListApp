@@ -18,7 +18,7 @@ class ToDoDetailViewModel {
     
     func getToDo(id: String) -> ToDoDetailPresentation
     {
-        var toDoObject: TodoObject! = service.getToDoEntity(id: id)
+        var toDoObject: ToDoObj! = service.getToDoEntity(id: id)
         
         toDo=ToDoDetailPresentation(toDo: toDoObject)
         
@@ -27,12 +27,12 @@ class ToDoDetailViewModel {
     
     func updateToDo(toDo: ToDoDetailPresentation){
         
-        service.updateToDo(toDo: TodoObject(id: toDo.id, title: toDo.title, detail: toDo.detail, completionDate: toDo.completionDate))
+        service.updateToDo(toDo: ToDoObj(id: toDo.id, title: toDo.title, detail: toDo.detail, completionDate: toDo.completionDate))
     }
     
     func addToDo(toDo: ToDoDetailPresentation){
         
-        service.addToDo(toDo: TodoObject(id: toDo.id, title: toDo.title, detail: toDo.detail, completionDate: toDo.completionDate))
+        service.addToDo(toDo: ToDoObj(id: toDo.id, title: toDo.title, detail: toDo.detail, completionDate: toDo.completionDate))
     }
     
 }

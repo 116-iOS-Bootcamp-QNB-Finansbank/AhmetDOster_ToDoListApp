@@ -21,7 +21,7 @@ struct ToDoDetailPresentation {
         self.completionDate = completionDate
     }
     
-    init(toDo: TodoObject!) {
+    init(toDo: ToDoObj!) {
         self.init(id: toDo.id, title: toDo.title, detail: toDo.detail, completionDate: toDo.completionDate)
     }
     

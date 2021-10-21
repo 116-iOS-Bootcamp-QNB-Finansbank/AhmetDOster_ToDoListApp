@@ -9,7 +9,7 @@ import Foundation
 
 class ToDoListViewModel {
     private let service: ToDoEntityManager
-    private var toDos: [TodoObject]! = []
+    private var toDos: [ToDoObj]! = []
     
     init() {
         self.service = appContainer.service

@@ -12,7 +12,7 @@ class ToDoDetailBuilder{
     
     static func build(with toDo: ToDoListPresentation!) -> DetailViewController {
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "ToDoStoryBoard", bundle: nil)
         let viewController = storyboard.instantiateViewController(identifier: "DetailViewController") as! DetailViewController
         
         viewController.toDo=toDo

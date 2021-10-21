@@ -10,7 +10,7 @@ import CoreData
 
 class ToDoEntityManager{
     
-    func addToDo(toDo: TodoObject!)
+    func addToDo(toDo: ToDoObj!)
     {
         if let toDo = toDo
         {
@@ -27,7 +27,7 @@ class ToDoEntityManager{
         
     }
     
-    func updateToDo(toDo: TodoObject!)
+    func updateToDo(toDo: ToDoObj!)
     {
         if let toDo = toDo
         {
@@ -72,7 +72,7 @@ class ToDoEntityManager{
         return nil
     }
     
-    func getToDoEntity(id : String) -> TodoObject!
+    func getToDoEntity(id : String) -> ToDoObj!
     {
         let fetchRequest: NSFetchRequest<ToDoEntity> = ToDoEntity.fetchRequest()
         do {
@@ -87,7 +87,7 @@ class ToDoEntityManager{
                 if entity.iD == id
                 {
                     
-                    return TodoObject(id: entity.iD!, title: entity.title!, detail: entity.detail!, completionDate: entity.completionDate ?? Date() )
+                    return ToDoObj(id: entity.iD!, title: entity.title!, detail: entity.detail!, completionDate: entity.completionDate ?? Date() )
                 }
             }
             
@@ -98,20 +98,20 @@ class ToDoEntityManager{
         return nil
     }
     
-    func getToDos() ->[TodoObject]! {
+    func getToDos() ->[ToDoObj]! {
         
         let fetchRequest: NSFetchRequest<ToDoEntity> = ToDoEntity.fetchRequest()
         do {
             let context = persistentContainer.viewContext
             
-            var toDoObjects: [TodoObject] = []
+            var toDoObjects: [ToDoObj] = []
             var entities: [ToDoEntity] = []
             
             entities = try context.fetch(fetchRequest)
             
             for entity in entities {
                 
-                toDoObjects.append(TodoObject(id: entity.iD!, title: entity.title! , detail: entity.detail! , completionDate: entity.completionDate!))
+                toDoObjects.append(ToDoObj(id: entity.iD!, title: entity.title! , detail: entity.detail! , completionDate: entity.completionDate!))
             }
             
             return toDoObjects

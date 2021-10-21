@@ -19,7 +19,7 @@ struct ToDoListPresentation {
         self.completionDate = compeltionDate
     }
     
-    init(toDo: TodoObject) {
+    init(toDo: ToDoObj) {
         self.init(id: toDo.id, title: toDo.title, compeltionDate: toDo.completionDate)
     }
 }
