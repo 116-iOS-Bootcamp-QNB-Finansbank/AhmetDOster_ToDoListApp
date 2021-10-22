@@ -15,11 +15,13 @@ class ToDoDetailViewModel: ToDoDetailViewModelProtocol {
     private var toDo: ToDoObj!
     private let service: ToDoEntityManager
     private let notificationManager: NotificationCenterManager
+    private let userNotificationManager : UserNotificationCenterManager
     
     init(toDo: ToDoObj!) {
         self.toDo = toDo
         self.service = appContainer.service
         self.notificationManager = appContainer.notificationManager
+        self.userNotificationManager = appContainer.userNotificationManager
     }
     
     func viewDidLoad() {
@@ -29,11 +31,17 @@ class ToDoDetailViewModel: ToDoDetailViewModelProtocol {
     func updateToDo(toDoDetail: ToDoDetailPresentation){
         
         service.updateToDo(toDo: ToDoObj(id: toDoDetail.id, title: toDoDetail.title, detail: toDoDetail.detail, completionDate: toDoDetail.completionDate))
+        
+        //Tamamlama zamanında local notification gönderir
+        userNotificationManager.addUserLocalNotification(identifier: toDoDetail.id, title: toDoDetail.title, subTitle: "", body: toDoDetail.detail, triggerDate: toDoDetail.completionDate)
     }
     
     func addToDo(toDoDetail: ToDoDetailPresentation){
         
         service.addToDo(toDo: ToDoObj(id: toDoDetail.id, title: toDoDetail.title, detail: toDoDetail.detail, completionDate: toDoDetail.completionDate))
+        
+        //Tamamlama zamanında local notification gönderir
+        userNotificationManager.addUserLocalNotification(identifier: toDoDetail.id, title: toDoDetail.title, subTitle: "", body: toDoDetail.detail, triggerDate: toDoDetail.completionDate)
     }
     
     func postNotification(name: Notification.Name)

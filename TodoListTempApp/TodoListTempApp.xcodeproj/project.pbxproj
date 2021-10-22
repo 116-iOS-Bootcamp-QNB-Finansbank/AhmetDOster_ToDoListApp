@@ -32,6 +32,7 @@
 		F05CD6A227218B7F00570223 /* ToDoDetailContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05CD6A127218B7F00570223 /* ToDoDetailContracts.swift */; };
 		F05CD6A42721E74100570223 /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05CD6A32721E74100570223 /* Notification+Extension.swift */; };
 		F05CD6A72721F48F00570223 /* NotificationCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05CD6A62721F48F00570223 /* NotificationCenterManager.swift */; };
+		F05CD6AB2722A35F00570223 /* UserNotificationCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05CD6AA2722A35F00570223 /* UserNotificationCenterManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		F05CD6A127218B7F00570223 /* ToDoDetailContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailContracts.swift; sourceTree = "<group>"; };
 		F05CD6A32721E74100570223 /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 		F05CD6A62721F48F00570223 /* NotificationCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterManager.swift; sourceTree = "<group>"; };
+		F05CD6AA2722A35F00570223 /* UserNotificationCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,11 +99,11 @@
 				F04973B4271B7CC800757FAB /* AppContainer.swift */,
 				F04973A2271B63CD00757FAB /* AppRouter.swift */,
 				F0497375271ABBED00757FAB /* SceneDelegate.swift */,
+				F0497373271ABBED00757FAB /* AppDelegate.swift */,
 				F05CD6A52721E74800570223 /* Extension */,
 				F0497398271AF79800757FAB /* Entities */,
 				F04973A4271B647500757FAB /* ToDoList */,
 				F04973A5271B648A00757FAB /* ToDoDetail */,
-				F0497373271ABBED00757FAB /* AppDelegate.swift */,
 				F049737F271ABBF500757FAB /* Assets.xcassets */,
 				F0497381271ABBF500757FAB /* LaunchScreen.storyboard */,
 				F0497384271ABBF600757FAB /* Info.plist */,
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				F05CD6A62721F48F00570223 /* NotificationCenterManager.swift */,
+				F05CD6AA2722A35F00570223 /* UserNotificationCenterManager.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				F04973B1271B6F6300757FAB /* ToDoDetailModel.swift in Sources */,
 				F049739B271B3A3C00757FAB /* TodoListTempApp.xcdatamodeld in Sources */,
 				F049738B271AE22800757FAB /* ToDoDetailViewController.swift in Sources */,
+				F05CD6AB2722A35F00570223 /* UserNotificationCenterManager.swift in Sources */,
 				F0497374271ABBED00757FAB /* AppDelegate.swift in Sources */,
 				F05CD6A42721E74100570223 /* Notification+Extension.swift in Sources */,
 				F04973A7271B64CB00757FAB /* ToDoListPresentation.swift in Sources */,

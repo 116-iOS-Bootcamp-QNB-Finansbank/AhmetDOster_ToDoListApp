@@ -14,4 +14,5 @@ class AppContainer {
     let service = ToDoEntityManager()
     let router = AppRouter()
     let notificationManager = NotificationCenterManager()
+    let userNotificationManager = UserNotificationCenterManager()
 }
