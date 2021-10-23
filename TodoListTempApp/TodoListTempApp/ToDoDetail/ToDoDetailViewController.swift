@@ -77,41 +77,32 @@ class ToDoDetailViewController: UIViewController {
         setInfoLabelHidden(isHidden: false)
     }
     
-    func isValid(titleText: String!, detailText: String!) -> Bool
+    func isTitleValidation(titleText: String) -> Bool
     {
-        if let title = titleText,
-           let detail = detailText
-        {
-            if title != "" && detail != ""
-            {
-                return true
-            }
-        }
-        
-        return false
+        return titleText != ""
     }
     
     //MARK: - ObjC Func
     @objc func saveButtonTapped(){
         
-        let title = titleTextField.text
-        let detail = detailTextField.text
+        let title = titleTextField.text ?? ""
+        let detail = detailTextField.text ?? ""
         
-        if isValid(titleText: title, detailText: detail)
+        if isTitleValidation(titleText: title)
         {
             let completionDate = completionDatePicker.date
             
             isChange = true
             if toDoDetail != nil && toDoDetail.id != ""
             {
-                let toDoObj = ToDoDetailPresentation(id: toDoDetail.id, title: title!, detail: detail!, completionDate: completionDate)
+                let toDoObj = ToDoDetailPresentation(id: toDoDetail.id, title: title, detail: detail , completionDate: completionDate)
                 viewModel.updateToDo(toDoDetail: toDoObj)
                 setInfoLabel(text: "Güncellendi.", color: UIColor.green)
             }
             else
             {
             
-                let toDoObj = ToDoDetailPresentation( title: title!, detail: detail!, completionDate: completionDate)
+                let toDoObj = ToDoDetailPresentation( title: title, detail: detail, completionDate: completionDate)
                 viewModel.addToDo(toDoDetail: toDoObj)
                 setInfoLabel(text: "Eklendi", color: UIColor.green)
                 toDoDetail = toDoObj
@@ -119,7 +110,7 @@ class ToDoDetailViewController: UIViewController {
         }
         else
         {
-            setInfoLabel(text: "Tüm alanlar dolu olmalıdır!", color: UIColor.red)
+            setInfoLabel(text: "Başlık alanı dolu olmalıdır!", color: UIColor.red)
         }
     }
     
