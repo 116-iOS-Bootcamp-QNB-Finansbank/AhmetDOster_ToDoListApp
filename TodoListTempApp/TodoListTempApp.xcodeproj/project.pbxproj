@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F01E26C3272445B800AAE604 /* EntityManagerContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01E26C2272445B800AAE604 /* EntityManagerContracts.swift */; };
 		F0497374271ABBED00757FAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0497373271ABBED00757FAB /* AppDelegate.swift */; };
 		F0497376271ABBED00757FAB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0497375271ABBED00757FAB /* SceneDelegate.swift */; };
 		F0497378271ABBED00757FAB /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0497377271ABBED00757FAB /* ToDoListViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F01E26C2272445B800AAE604 /* EntityManagerContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManagerContracts.swift; sourceTree = "<group>"; };
 		F0497370271ABBED00757FAB /* TodoListTempApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoListTempApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0497373271ABBED00757FAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0497375271ABBED00757FAB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				F0497392271AF70D00757FAB /* ToDoEntityManager.swift */,
+				F01E26C2272445B800AAE604 /* EntityManagerContracts.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				F05CD6A42721E74100570223 /* Notification+Extension.swift in Sources */,
 				F04973A7271B64CB00757FAB /* ToDoListPresentation.swift in Sources */,
 				F0497393271AF70D00757FAB /* ToDoEntityManager.swift in Sources */,
+				F01E26C3272445B800AAE604 /* EntityManagerContracts.swift in Sources */,
 				F04973AF271B6F4D00757FAB /* ToDoDetailPresentation.swift in Sources */,
 				F04973AD271B6AB600757FAB /* ToDoListViewModel.swift in Sources */,
 				F0497376271ABBED00757FAB /* SceneDelegate.swift in Sources */,

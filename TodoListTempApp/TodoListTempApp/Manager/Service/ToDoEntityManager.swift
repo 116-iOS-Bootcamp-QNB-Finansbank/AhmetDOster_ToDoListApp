@@ -8,9 +8,10 @@
 import Foundation
 import CoreData
 
-class ToDoEntityManager{
+class ToDoEntityManager: ToDoEntityManagerProtocol{
     
-    func addToDo(toDo: ToDoObj!)
+    // MARK: - Public func
+    func addToDo(toDo: ToDoObj!) -> Bool
     {
         if let toDo = toDo
         {
@@ -22,16 +23,16 @@ class ToDoEntityManager{
             entity.completionDate = toDo.completionDate
             
             saveContext()
+            return true
         }
-        else { return}
         
+        return false
     }
     
-    func updateToDo(toDo: ToDoObj!)
+    func updateToDo(toDo: ToDoObj!) -> Bool
     {
         if let toDo = toDo
         {
-            let context = persistentContainer.viewContext
             let entity: ToDoEntity! = getToDoEntity(id: toDo.id)
             
             if let entity = entity
@@ -41,10 +42,11 @@ class ToDoEntityManager{
                 entity.completionDate = toDo.completionDate
                 
                 saveContext()
+                return true
             }
         }
-        else { return}
         
+        return false
     }
     
     func getToDoEntity(id : String) -> ToDoEntity!
@@ -72,6 +74,32 @@ class ToDoEntityManager{
         return nil
     }
     
+    func getToDos() ->[ToDoObj]! {
+        
+        let fetchRequest: NSFetchRequest<ToDoEntity> = ToDoEntity.fetchRequest()
+        do {
+            let context = persistentContainer.viewContext
+            
+            var toDoObjects: [ToDoObj] = []
+            var entities: [ToDoEntity] = []
+            
+            entities = try context.fetch(fetchRequest)
+            
+            for entity in entities {
+                
+                toDoObjects.append(ToDoObj(id: entity.iD!, title: entity.title! , detail: entity.detail! , completionDate: entity.completionDate!))
+            }
+            
+            return toDoObjects
+            
+        } catch {
+            //handle error
+        }
+       
+        return nil
+    }
+    
+    // MARK: - Private func
     func getToDoEntity(id : String) -> ToDoObj!
     {
         let fetchRequest: NSFetchRequest<ToDoEntity> = ToDoEntity.fetchRequest()
@@ -90,31 +118,6 @@ class ToDoEntityManager{
                     return ToDoObj(id: entity.iD!, title: entity.title!, detail: entity.detail!, completionDate: entity.completionDate ?? Date() )
                 }
             }
-            
-        } catch {
-            //handle error
-        }
-       
-        return nil
-    }
-    
-    func getToDos() ->[ToDoObj]! {
-        
-        let fetchRequest: NSFetchRequest<ToDoEntity> = ToDoEntity.fetchRequest()
-        do {
-            let context = persistentContainer.viewContext
-            
-            var toDoObjects: [ToDoObj] = []
-            var entities: [ToDoEntity] = []
-            
-            entities = try context.fetch(fetchRequest)
-            
-            for entity in entities {
-                
-                toDoObjects.append(ToDoObj(id: entity.iD!, title: entity.title! , detail: entity.detail! , completionDate: entity.completionDate!))
-            }
-            
-            return toDoObjects
             
         } catch {
             //handle error
