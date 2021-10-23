@@ -35,9 +35,16 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
     
     //MARK: - func (private)
     func addAddUIBarButtonItem() {
-        let addButton = UIBarButtonItem(title: "Ekle", style: .plain, target: self, action: #selector(addButtonTapped))
+        let addButton = createUIBarButtonItem(imageSystemName: "plus.app", action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItems = [addButton]
+    }
+    
+    func createUIBarButtonItem(imageSystemName: String, action: Selector) -> UIBarButtonItem
+    {
+        let imageDelete = UIImage(systemName: imageSystemName)
+        let button = UIBarButtonItem(image: imageDelete, style: .plain, target: self, action: action)
         
+        return button
     }
     
     func sortAddUIBarButtonItem() {

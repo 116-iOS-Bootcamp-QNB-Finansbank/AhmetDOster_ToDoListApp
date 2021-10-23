@@ -16,6 +16,7 @@ protocol ToDoDetailViewModelDelegate: NSObject {
 protocol ToDoDetailViewModelProtocol {
     var delegate: ToDoDetailViewModelDelegate? { get set }
     func viewDidLoad()
+    func deleteToDo(toDoId: String)
     func updateToDo(toDoDetail: ToDoDetailPresentation)
     func addToDo(toDoDetail: ToDoDetailPresentation)
     func postNotification(name: Notification.Name)

@@ -49,6 +49,18 @@ class ToDoEntityManager: ToDoEntityManagerProtocol{
         return false
     }
     
+    func deleteToDo(toDoId: String)
+    {
+        
+        let entity: ToDoEntity! = getToDoEntity(id: toDoId)
+        
+        if let entity = entity
+        {
+            let context = persistentContainer.viewContext
+            context.delete(entity)
+        }
+    }
+    
     func getToDoEntity(id : String) -> ToDoEntity!
     {
         let fetchRequest: NSFetchRequest<ToDoEntity> = ToDoEntity.fetchRequest()

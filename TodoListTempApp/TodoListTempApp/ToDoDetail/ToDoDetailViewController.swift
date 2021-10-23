@@ -29,8 +29,10 @@ class ToDoDetailViewController: UIViewController {
         super.viewDidLoad()
         
         viewModel.viewDidLoad()
-        addNavigationBarSaveButton()
-        addNavigationBarBackButton()
+        
+        addNavigationBarLeftButtons()
+        addNavigationBarRightButtons()
+        
         isChange = false
         setInfoLabelHidden(isHidden: true)
         
@@ -41,20 +43,28 @@ class ToDoDetailViewController: UIViewController {
         infoLabel.isHidden = isHidden
     }
     
-    func addNavigationBarSaveButton(){
-        let save = UIBarButtonItem(title: "Kaydet", style: .plain, target: self, action: #selector(saveButtonTapped))
+    func addNavigationBarRightButtons(){
+        
+        let deleteButton = createUIBarButtonItem(imageSystemName: "trash", action: #selector(deleteButtonTapped))
+        let save = createUIBarButtonItem(imageSystemName: "square.and.arrow.up", action: #selector(saveButtonTapped))
 
-        navigationItem.rightBarButtonItems = [save]
+        navigationItem.rightBarButtonItems = [deleteButton, save]
     }
     
-    func addNavigationBarBackButton(){
+    func createUIBarButtonItem(imageSystemName: String, action: Selector) -> UIBarButtonItem
+    {
+        let imageDelete = UIImage(systemName: imageSystemName)
+        let button = UIBarButtonItem(image: imageDelete, style: .plain, target: self, action: action)
+        
+        return button
+    }
+    
+    
+    func addNavigationBarLeftButtons(){
         
         self.navigationItem.hidesBackButton = true
         
-        let image = UIImage(systemName: "chevron.left")
-        let back = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(backButtonTapped))
-        
-        
+        let back = createUIBarButtonItem(imageSystemName: "chevron.left", action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItems = [back]
     }
     
@@ -82,7 +92,34 @@ class ToDoDetailViewController: UIViewController {
         return titleText != ""
     }
     
+    func isDeleteValidation() -> Bool
+    {
+        if toDoDetail != nil && toDoDetail.id != ""
+        {
+            return true
+        }
+            
+        return false
+    }
+    
     //MARK: - ObjC Func
+    @objc func deleteButtonTapped(){
+        
+        if isDeleteValidation()
+        {
+            viewModel.deleteToDo(toDoId: toDoDetail!.id)
+            setInfoLabel(text: "Silindi.", color: UIColor.red)
+            isChange = true
+            toDoDetail = nil
+            setDetail(toDoDetail: ToDoDetailPresentation())
+            
+        }
+        else
+        {
+            setInfoLabel(text: "To-do bulunamadı!", color: UIColor.red)
+        }
+    }
+    
     @objc func saveButtonTapped(){
         
         let title = titleTextField.text ?? ""

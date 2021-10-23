@@ -31,6 +31,11 @@ class ToDoDetailViewModel: ToDoDetailViewModelProtocol {
         delegate?.showMovieDetail(ToDoDetailPresentation(toDo: toDo))
     }
     
+    func deleteToDo(toDoId: String)
+    {
+        service.deleteToDo(toDoId: toDoId)
+    }
+    
     func updateToDo(toDoDetail: ToDoDetailPresentation){
         
         service.updateToDo(toDo: ToDoObj(id: toDoDetail.id, title: toDoDetail.title, detail: toDoDetail.detail, completionDate: toDoDetail.completionDate))
