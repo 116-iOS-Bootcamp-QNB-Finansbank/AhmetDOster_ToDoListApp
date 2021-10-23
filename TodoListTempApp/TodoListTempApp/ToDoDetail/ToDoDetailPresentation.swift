@@ -21,6 +21,14 @@ struct ToDoDetailPresentation {
         self.completionDate = completionDate
     }
     
+    init(title: String, detail: String, completionDate: Date)
+    {
+        self.id = UUID().uuidString
+        self.title = title
+        self.detail = detail
+        self.completionDate = completionDate
+    }
+    
     init(toDo: ToDoObj!) {
         
         if let toDo = toDo

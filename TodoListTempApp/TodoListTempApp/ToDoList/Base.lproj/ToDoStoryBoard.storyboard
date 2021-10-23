@@ -112,9 +112,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OqT-Ep-LJ5">
-                                <rect key="frame" x="20" y="259" width="38" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OqT-Ep-LJ5">
+                                <rect key="frame" x="20" y="259" width="374" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="lCF-2J-xao"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" systemColor="systemGreenColor"/>
                                 <nil key="highlightedColor"/>
@@ -126,6 +128,11 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="O7k-49-70Z"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="O7k-49-70Z" firstAttribute="trailing" secondItem="OqT-Ep-LJ5" secondAttribute="trailing" constant="20" id="BSj-F2-Pcx"/>
+                            <constraint firstItem="OqT-Ep-LJ5" firstAttribute="top" secondItem="O7k-49-70Z" secondAttribute="top" constant="215" id="UPR-PF-TQg"/>
+                            <constraint firstItem="OqT-Ep-LJ5" firstAttribute="leading" secondItem="O7k-49-70Z" secondAttribute="leading" constant="20" id="qZT-wW-4FG"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Detay" leftItemsSupplementBackButton="YES" id="2jI-sE-Lyw">
                         <barButtonItem key="backBarButtonItem" title="Geri" id="K2f-tC-WAa"/>
