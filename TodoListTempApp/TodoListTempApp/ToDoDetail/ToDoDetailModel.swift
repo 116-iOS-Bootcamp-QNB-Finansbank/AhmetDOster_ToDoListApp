@@ -7,34 +7,55 @@
 
 import Foundation
 
-class ToDoDetailViewModel {
+
+class ToDoDetailViewModel: ToDoDetailViewModelProtocol {
+    
+    //MARK: Properties
+    weak var delegate: ToDoDetailViewModelDelegate?
+    
+    private var toDo: ToDoObj!
     private let service: ToDoEntityManager
-    private var toDo: ToDoDetailPresentation
+    private let notificationManager: NotificationCenterManager
+    private let userNotificationManager : UserNotificationCenterManager
     
-    init() {
+    //MARK: init
+    init(toDo: ToDoObj!) {
+        self.toDo = toDo
         self.service = appContainer.service
-        self.toDo = ToDoDetailPresentation()
+        self.notificationManager = appContainer.notificationManager
+        self.userNotificationManager = appContainer.userNotificationManager
     }
     
-    func getToDo(id: String) -> ToDoDetailPresentation
+    //MARK: func
+    func viewDidLoad() {
+        delegate?.showMovieDetail(ToDoDetailPresentation(toDo: toDo))
+    }
+    
+    func deleteToDo(toDoId: String)
     {
-        var toDoObject: TodoObject! = service.getToDoEntity(id: id)
-        
-        toDo=ToDoDetailPresentation(toDo: toDoObject)
-        
-        return toDo
+        service.deleteToDo(toDoId: toDoId)
     }
     
-    func updateToDo(toDo: ToDoDetailPresentation){
+    func updateToDo(toDoDetail: ToDoDetailPresentation){
         
-        service.updateToDo(toDo: TodoObject(id: toDo.id, title: toDo.title, detail: toDo.detail, completionDate: toDo.completionDate))
+        service.updateToDo(toDo: ToDoObj(id: toDoDetail.id, title: toDoDetail.title, detail: toDoDetail.detail, completionDate: toDoDetail.completionDate))
+        
+        //Tamamlama zamanında local notification gönderir
+        userNotificationManager.addUserLocalNotification(identifier: toDoDetail.id, title: toDoDetail.title, subTitle: "", body: toDoDetail.detail, triggerDate: toDoDetail.completionDate)
     }
     
-    func addToDo(toDo: ToDoDetailPresentation){
+    func addToDo(toDoDetail: ToDoDetailPresentation){
         
-        service.addToDo(toDo: TodoObject(id: toDo.id, title: toDo.title, detail: toDo.detail, completionDate: toDo.completionDate))
+        service.addToDo(toDo: ToDoObj(id: toDoDetail.id, title: toDoDetail.title, detail: toDoDetail.detail, completionDate: toDoDetail.completionDate))
+        
+        //Tamamlama zamanında local notification gönderir
+        userNotificationManager.addUserLocalNotification(identifier: toDoDetail.id, title: toDoDetail.title, subTitle: "", body: toDoDetail.detail, triggerDate: toDoDetail.completionDate)
     }
     
+    func postNotification(name: Notification.Name)
+    {
+        notificationManager.postNotification(name: name)
+    }
 }
 
 

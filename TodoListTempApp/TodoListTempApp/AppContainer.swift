@@ -6,10 +6,16 @@
 //
 
 import Foundation
+import UIKit
 
+//MARK: Properties
 let appContainer = AppContainer()
 
 class AppContainer {
+    
+    //MARK: Properties
     let service = ToDoEntityManager()
     let router = AppRouter()
+    let notificationManager = NotificationCenterManager()
+    let userNotificationManager = UserNotificationCenterManager()
 }
