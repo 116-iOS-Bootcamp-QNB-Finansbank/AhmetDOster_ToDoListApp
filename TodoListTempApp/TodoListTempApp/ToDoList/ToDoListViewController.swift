@@ -19,6 +19,7 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
     var model : ToDoListViewModel!
     var presenter: ToDoListPresenterProtocol!
     var toDos: [ToDoListPresentation] = []
+    var sortState: String = ""
     
     //MARK: - func (UIViewController)
     override func viewDidLoad() {
@@ -30,7 +31,7 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
         addNotificationRefreshToDoList()
         
         addAddUIBarButtonItem()
-        sortAddUIBarButtonItem()
+        sortAddUIBarButtonItem(imageSystemName: "", tag: 0)
     }
     
     //MARK: - func (private)
@@ -47,9 +48,16 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
         return button
     }
     
-    func sortAddUIBarButtonItem() {
-        let sortButton = UIBarButtonItem(title: "Sırala", style: .plain, target: self, action: #selector(sortButtonTapped))
-        navigationItem.leftBarButtonItems = [sortButton]
+    func sortAddUIBarButtonItem(imageSystemName: String, tag: Int) {
+        
+        let sortButton = UIButton(type: .system)
+        sortButton.setTitle("Sırala", for: .normal)
+        sortButton.setImage(UIImage(systemName: imageSystemName), for: .normal)
+        sortButton.addTarget( self, action: #selector(sortButtonTapped(_sender:)), for: .touchUpInside)
+        sortButton.tag = tag
+        let sortBarButton = UIBarButtonItem(customView: sortButton)
+        
+        navigationItem.leftBarButtonItems = [sortBarButton]
     }
     
     func addNotificationRefreshToDoList() {
@@ -75,11 +83,24 @@ class ToDoListViewController: UIViewController, ToDoListViewProtocol {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
-    @objc func sortButtonTapped(){
+    @objc func sortButtonTapped(_sender: UIButton){
         
-        filterToDoList = filterToDoList.sorted(by: {
-            $0.completionDate.compare($1.completionDate) == .orderedDescending
-        })
+        let tag = _sender.tag
+        
+        if tag == 0 || tag==2
+        {
+            filterToDoList = filterToDoList.sorted(by: {
+                $0.completionDate.compare($1.completionDate) == .orderedDescending
+            })
+            sortAddUIBarButtonItem(imageSystemName: "chevron.down", tag: 1)
+        }
+        else
+        {
+            filterToDoList = filterToDoList.sorted(by: {
+                $0.completionDate.compare($1.completionDate) == .orderedAscending
+            })
+            sortAddUIBarButtonItem(imageSystemName: "chevron.up", tag: 2)
+        }
         
         toDoTableView.reloadData()
     }
