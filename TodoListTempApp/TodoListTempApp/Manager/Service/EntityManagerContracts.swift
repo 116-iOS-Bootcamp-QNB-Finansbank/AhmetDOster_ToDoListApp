@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 
+//MARK: ToDoEntityManagerProtocol
 protocol ToDoEntityManagerProtocol {
     func addToDo(toDo: ToDoObj!) -> Bool
     func updateToDo(toDo: ToDoObj!) -> Bool

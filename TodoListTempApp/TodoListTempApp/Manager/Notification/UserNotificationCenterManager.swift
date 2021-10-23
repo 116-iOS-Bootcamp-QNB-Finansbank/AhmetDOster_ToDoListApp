@@ -8,7 +8,7 @@
 import Foundation
 import UserNotifications
 
-class UserNotificationCenterManager {
+class UserNotificationCenterManager: UserNotificationCenterManagerProtocol {
     
     //MARK: Properties
     let userNotificationCenter: UNUserNotificationCenter
@@ -45,7 +45,8 @@ class UserNotificationCenterManager {
     
     
     //Notification varsa update yoksa ekler
-    func addUserLocalNotification(identifier: String, title: String, subTitle: String, body: String, triggerDate: Date){
+    func addUserLocalNotification(identifier: String, title: String, subTitle: String, body: String, triggerDate: Date)
+    {
         
         //Content
         let content = UNMutableNotificationContent()
