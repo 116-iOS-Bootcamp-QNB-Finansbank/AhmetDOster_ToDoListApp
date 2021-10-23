@@ -10,6 +10,7 @@ import Foundation
 
 class ToDoDetailViewModel: ToDoDetailViewModelProtocol {
     
+    //MARK: Properties
     weak var delegate: ToDoDetailViewModelDelegate?
     
     private var toDo: ToDoObj!
@@ -17,6 +18,7 @@ class ToDoDetailViewModel: ToDoDetailViewModelProtocol {
     private let notificationManager: NotificationCenterManager
     private let userNotificationManager : UserNotificationCenterManager
     
+    //MARK: init
     init(toDo: ToDoObj!) {
         self.toDo = toDo
         self.service = appContainer.service
@@ -24,6 +26,7 @@ class ToDoDetailViewModel: ToDoDetailViewModelProtocol {
         self.userNotificationManager = appContainer.userNotificationManager
     }
     
+    //MARK: func
     func viewDidLoad() {
         delegate?.showMovieDetail(ToDoDetailPresentation(toDo: toDo))
     }

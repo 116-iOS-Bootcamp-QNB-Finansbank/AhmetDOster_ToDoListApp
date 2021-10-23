@@ -7,10 +7,12 @@
 
 import Foundation
 
+//MARK: ToDoDetailViewModelDelegate
 protocol ToDoDetailViewModelDelegate: NSObject {
     func showMovieDetail(_ todo: ToDoDetailPresentation)
 }
 
+//MARK: ToDoDetailViewModelProtocol
 protocol ToDoDetailViewModelProtocol {
     var delegate: ToDoDetailViewModelDelegate? { get set }
     func viewDidLoad()

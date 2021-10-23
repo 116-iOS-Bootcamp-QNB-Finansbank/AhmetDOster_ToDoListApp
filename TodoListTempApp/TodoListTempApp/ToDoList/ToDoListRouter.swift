@@ -8,12 +8,16 @@
 import UIKit
 
 class ToDoListRouter: NSObject, ToDoListRouterProtocol {
+    
+    //MARK: Properties
     private unowned let view: UIViewController
     
+    //MARK: init
     init(view: UIViewController) {
         self.view = view
     }
     
+    //MARK: func
     func navigate(to route: ToDoListRoute) {
         switch route {
         case .showToDoDetail(let toDo):

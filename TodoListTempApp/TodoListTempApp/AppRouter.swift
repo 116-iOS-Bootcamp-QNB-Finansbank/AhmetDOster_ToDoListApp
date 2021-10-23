@@ -9,6 +9,7 @@ import UIKit
 
 class AppRouter {
     
+    //MARK: func
     func start(scene: UIWindowScene) -> UIWindow {
         let window = UIWindow(frame: UIScreen.main.bounds)
         let navigationController = UINavigationController(rootViewController: ToDoListBuilder.build())

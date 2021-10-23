@@ -9,13 +9,17 @@ import Foundation
 import UIKit
 
 class ToDoListViewModel {
+    
+    //MARK: Properties
     private let service: ToDoEntityManager
     private var toDos: [ToDoObj]! = []
     
+    //MARK: ToDoListViewProtocol
     init() {
         self.service = appContainer.service
     }
     
+    //MARK: func
     func getToDos() -> [ToDoListPresentation]! {
         toDos = service.getToDos()
         

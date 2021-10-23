@@ -9,11 +9,13 @@ import Foundation
 
 struct ToDoDetailPresentation {
     
+    //MARK: Properties
     let id: String
     let title: String
     let detail: String
     let completionDate: Date
     
+    //MARK: init
     init(id: String, title: String, detail: String, completionDate: Date) {
         self.id = id
         self.title = title

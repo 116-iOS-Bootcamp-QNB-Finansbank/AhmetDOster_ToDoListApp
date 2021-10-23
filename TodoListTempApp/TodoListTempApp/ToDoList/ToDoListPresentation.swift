@@ -9,10 +9,12 @@ import Foundation
 
 struct ToDoListPresentation {
     
+    //MARK: Properties
     let id: String
     let title: String
     let completionDate: Date
     
+    //MARK: func
     init(id: String, title: String, compeltionDate: Date) {
         self.id = id
         self.title = title

@@ -9,12 +9,13 @@ import Foundation
 
 class ToDoObj{
     
+    //MARK: Properties
     let id: String
     var title: String
     var detail: String
     var completionDate: Date
     
-    
+    //MARK: init
     init(id: String, title: String, detail: String, completionDate: Date)
     {
         self.id = id

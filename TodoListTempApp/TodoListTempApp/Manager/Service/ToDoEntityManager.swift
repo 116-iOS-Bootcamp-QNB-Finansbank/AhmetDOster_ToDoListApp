@@ -10,7 +10,7 @@ import CoreData
 
 class ToDoEntityManager: ToDoEntityManagerProtocol{
     
-    // MARK: - Public func
+    // MARK: - func
     func addToDo(toDo: ToDoObj!) -> Bool
     {
         if let toDo = toDo
@@ -99,7 +99,6 @@ class ToDoEntityManager: ToDoEntityManagerProtocol{
         return nil
     }
     
-    // MARK: - Private func
     func getToDoEntity(id : String) -> ToDoObj!
     {
         let fetchRequest: NSFetchRequest<ToDoEntity> = ToDoEntity.fetchRequest()

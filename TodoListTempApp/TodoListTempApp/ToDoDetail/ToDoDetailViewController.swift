@@ -24,7 +24,7 @@ class ToDoDetailViewController: UIViewController {
     }
     var isChange: Bool!
     
-    //MARK: - Func( override)
+    //MARK: - Func ( override)
     override func viewDidLoad() {
         super.viewDidLoad()
         

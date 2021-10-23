@@ -36,6 +36,8 @@ class ToDoListPresenter: NSObject, ToDoListPresenterProtocol {
 }
 
 extension ToDoListPresenter: ToDoListInteractorDelegate {
+    
+    //MARK: func
     func handleOutput(_ output: ToDoListInteractorOutput) {
         switch output {
         case .showToDoList(let toDos):
